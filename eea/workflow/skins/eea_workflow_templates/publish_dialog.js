@@ -13,7 +13,7 @@ function make_publish_text(questions){
     var text = "Self-QA:    ";
     jQuery(".question", questions).each(function(){
         var title = jQuery("h3", this).text();
-        var answer = jQuery(":radio[checked]", this).val();
+        var answer = jQuery(":checked", this).val();
         var comment = jQuery("textarea", this).val();
         if (comment.length) {
             comment += "\n";
@@ -152,7 +152,7 @@ PublishDialog.Window.prototype._open = function(ui){
         //see if all radios have a value. When they do, activate the Ok button
         jQuery(".questions input[type='radio']", self.target).change(function(){
             var questions = jQuery(".question", self.target);
-            var activated = jQuery(":radio[checked]", self.target);
+            var activated = jQuery(":checked", self.target);
             var okbtn = self.getDialogButton('Ok');
             if (questions.length === activated.length) {
                 jQuery(okbtn).removeAttr('disabled').removeClass('ui-state-disabled');
@@ -182,3 +182,4 @@ jQuery(document).ready(function ($) {
     var p = new PublishDialog(['publish']);
     p.install();
 });
+

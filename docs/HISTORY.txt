@@ -3,6 +3,9 @@ Changelog
 
 8.2.dev0 - (unreleased)
 -----------------------
+* Bug fix: fixed publish dialog input checks when using a jquery version
+  higher than 1.7.2 which ships with Plone 4.3
+  [ichimdav refs #28224]
 
 8.1 - (2015-06-02)
 ------------------
