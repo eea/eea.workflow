@@ -9,34 +9,25 @@
   <tal:ver tal:omit-tag="" tal:define="
     versions_api nocall:context/@@getVersions; 
     newer versions_api/later_versions;
-    readiness_view nocall:context/@@get_readiness | nothing" >
+    readiness_view nocall:context/@@get_readiness | nothing">
 
     <div tal:condition="python:(not readiness_view) or readiness_view.is_ready_for('published')" tal:omit-tag="">
 
       <div tal:replace="structure questions" />
 
-      <input type="hidden" name="effective_date" tal:condition="not:newer" 
+      <input type="hidden" name="effective_date" tal:condition="not:newer"
         tal:attributes="value modules/DateTime/DateTime" />
-
-      <div style="padding-top:20px;" >
-
-      <div id="workflow-emails-placeholder" >
-        <img src="" tal:attributes="src string:${context/portal_url}/eea-ajax-loader.gif" />
-        <span i18n:translate="">Loading notification emails...</span>
-      </div>
-
-      </div>
 
       <tal:new tal:condition="newer" tal:omit-tag="">
         <h2 i18n:translate="">Set the publishing date</h2>
         <p i18n:translate="">This item has already been published in a newer version. You need to decide on a date,
           in the past, when this item should have been published. The following
           table of all versions should help you in deciding the actual date.
-          If you have questions, please contact the 
-          <a href="mailto:admin" 
-            tal:define="portal python:context.portal_url.getPortalObject(); 
-            email_address python:portal.getProperty('email_from_address'); 
-            email_from python:portal.getProperty('email_from_name')" 
+          If you have questions, please contact the
+          <a href="mailto:admin"
+            tal:define="portal python:context.portal_url.getPortalObject();
+            email_address python:portal.getProperty('email_from_address');
+            email_from python:portal.getProperty('email_from_name')"
             tal:attributes="href string:mailto:$email_address" tal:content="email_from">admin</a>.
         </p>
         <table class="listing nosort">
@@ -59,12 +50,12 @@
         </table>
         
         <p i18n:translate="">
-            Choose manual publication date. We recommend something close to the date below, 
+            Choose manual publication date. We recommend something close to the date below,
             which is 30 days after the item was initially created.
         </p>
      
         <link type="text/css" rel="stylesheet" media="all"
-            tal:define="src string:${context/portal_url}/jscalendar/calendar-system.css;" tal:attributes="href src" />    
+            tal:define="src string:${context/portal_url}/jscalendar/calendar-system.css;" tal:attributes="href src" />
         <script type="text/javascript"
             tal:attributes="src string:${context/portal_url}/jscalendar/calendar_stripped.js"></script>
         <script type="text/javascript" charset="iso-8859-1"
@@ -77,7 +68,7 @@
 
     </div>
 
-    <p tal:condition="python:readiness_view and not readiness_view.is_ready_for('published')" >
+    <p tal:condition="python:readiness_view and not readiness_view.is_ready_for('published')">
       This item is not yet ready to be published!
     </p>
 

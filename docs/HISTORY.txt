@@ -3,6 +3,10 @@ Changelog
 
 8.2.dev0 - (unreleased)
 -----------------------
+* Change: removed workflow_emails logic which depended on
+  Products.EEAContentTypes, used only for indicators which was
+  superseeded by content rules
+  [ichimdav refs #28224]
 * Bug fix: fixed publish dialog input checks when using a jquery version
   higher than 1.7.2 which ships with Plone 4.3
   [ichimdav refs #28224]

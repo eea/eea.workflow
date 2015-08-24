@@ -113,10 +113,6 @@ PublishDialog.Window.prototype.handle_ok = function(e){
     jQuery("textarea#comment", self.target).val(text);
     jQuery(".questions").remove();
 
-    //var now = new Date();
-    //now_str = now.getFullYear() + "/" + now.getMonth() + 1 + '/' + now.getDate();
-    //form.append(jQuery("<input type='hidden' name='effective_date'>").attr('value', now_str));
-
     jQuery("input[name='workflow_action']", self.target).attr('value', self.transition);
     $form.submit();
     this.dialog.dialog("close");
@@ -133,22 +129,6 @@ PublishDialog.Window.prototype._open = function(ui){
     var url = base + "/publish_dialog";
 
     jQuery(self.target).load(url, function(){
-        var base_url = jQuery(".metadata .context_url").text();
-        jQuery("#workflow-emails-placeholder").load(base_url + '/workflow_emails', function(){
-            jQuery("#notice_emails .collapsibleHeader").click(
-                function(){
-                    jQuery(this).parent().each(
-                        function(){
-                            var el = jQuery(this);
-                            if (el.hasClass('expandedInlineCollapsible')) {
-                                el.removeClass('expandedInlineCollapsible').addClass('collapsedInlineCollapsible');
-                            } else {
-                                el.removeClass('collapsedInlineCollapsible').addClass('expandedInlineCollapsible');
-                            }
-                        }
-                        );
-                });
-        });
         //see if all radios have a value. When they do, activate the Ok button
         jQuery(".questions input[type='radio']", self.target).change(function(){
             var questions = jQuery(".question", self.target);
@@ -174,7 +154,6 @@ PublishDialog.Window.prototype.getDialogButton = function(button_name) {
             return $button[0];
         }
     }
-    return;
 };
 
 
