@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.3.dev0 - (unreleased)
+-----------------------
+
 8.2 - (2015-09-10)
 ------------------
 * Change: removed workflow_emails logic which depended on
