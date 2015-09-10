@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.2.dev0 - (unreleased)
------------------------
+8.2 - (2015-09-10)
+------------------
 * Change: removed workflow_emails logic which depended on
   Products.EEAContentTypes, used only for indicators which was
   superseeded by content rules
