@@ -3,6 +3,9 @@ Changelog
 
 8.3.dev0 - (unreleased)
 -----------------------
+* Upgrade step: from Plone root:
+   - run /@@archive_previous_versions?alsoChildren=True
+   - [chiridra refs #28681]
 
 8.2 - (2015-09-10)
 ------------------
