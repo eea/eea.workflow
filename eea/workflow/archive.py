@@ -163,6 +163,104 @@ def archive_object(context, **kwargs):
     storage.archive(context, **kwargs)
     return context
 
+def unarchive_object(context):
+    """ Unarchive given context
+    :param context: object
+    """
+    storage = queryAdapter(context, IObjectArchivator)
+    storage.unarchive(context)
+    return context
+
+def archive_children(context, **kwargs):
+    """ Archive given context's children
+    :param context: object
+    :param kwargs: options that are passed to the archive method directly
+           affecting it's results if they are passed
+    """
+    catalog = getToolByName(context, 'portal_catalog')
+    query = {'path': '/'.join(context.getPhysicalPath()), 'Language': 'all'}
+    brains = catalog.searchResults(query)
+
+    affected_objects = []
+    for brain in brains:
+        obj = brain.getObject()
+        if obj == context:
+            continue
+        storage = queryAdapter(obj, IObjectArchivator)
+        if not storage:
+            continue
+        storage.archive(obj, **kwargs)
+        affected_objects.append(obj)
+    return affected_objects
+
+def unarchive_children(context):
+    """ Unarchive given context's children
+    :param context: object
+    """
+    catalog = getToolByName(context, 'portal_catalog')
+    query = {'path': '/'.join(context.getPhysicalPath()), 'Language': 'all'}
+    brains = catalog.searchResults(query)
+
+    affected_objects = []
+    for brain in brains:
+        obj = brain.getObject()
+        if obj == context:
+            continue
+        if IObjectArchived.providedBy(obj):
+            storage = queryAdapter(obj, IObjectArchivator)
+            storage.unarchive(obj)
+            affected_objects.append(obj)
+    return affected_objects
+
+def archive_translations(context, also_children=False, also_versions=False,
+                         **kwargs):
+    """ Archive given context's translations
+    :param context: object
+    :param bool also_children: boolean indicating whether the children of the
+           translations should also be archived
+    :param bool also_versions: boolean indicating whether the versions of the
+           translations should also be archived
+    :param kwargs: options that are passed to the archive method directly
+           affecting it's results if they are passed
+    """
+    canonical = context.getCanonical()
+    translations = canonical.getTranslations()
+
+    affected_objects = []
+    for trans in translations:
+        obj = canonical.getTranslation(trans)
+        if obj == context:
+            continue
+        affected_objects.append(
+            archive_object(obj, **kwargs))
+        if also_children:
+            affected_objects.extend(
+                archive_children(obj, **kwargs))
+        if also_versions:
+            affected_objects.extend(
+                archive_previous_versions(obj, also_children=also_children,
+                    **kwargs))
+    return affected_objects
+
+def unarchive_translations(context, also_children=False):
+    """ Unarchive given context's translations
+    :param context: object
+    :param bool also_children: boolean indicating whether the children of the
+           translations should also be archived
+    """
+    canonical = context.getCanonical()
+    translations = canonical.getTranslations()
+
+    affected_objects = []
+    for trans in translations:
+        obj = canonical.getTranslation(trans)
+        if obj == context:
+            continue
+        affected_objects.append(
+            unarchive_object(obj))
+        if also_children:
+            affected_objects.extend(unarchive_children(obj))
+    return affected_objects
 
 def archive_obj_and_children(context, **kwargs):
     """ Archive given context and it's children

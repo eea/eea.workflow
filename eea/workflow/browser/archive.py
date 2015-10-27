@@ -3,14 +3,14 @@
 
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
-from zope.component import queryAdapter, getMultiAdapter
+from zope.component import getMultiAdapter
 from plone.protect import PostOnly
 
-from Products.CMFPlone.utils import getToolByName
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
-from eea.workflow.archive import archive_object, archive_obj_and_children, \
-    archive_previous_versions
-from eea.workflow.interfaces import IObjectArchivator, IObjectArchived
+from eea.workflow.archive import archive_object, archive_previous_versions, \
+    archive_children, archive_translations, \
+    unarchive_object, unarchive_children, unarchive_translations
+from eea.workflow.interfaces import IObjectArchivator
 
 
 class Reasons(BrowserView):
@@ -30,8 +30,9 @@ class ArchiveContent(BrowserView):
     def __call__(self, **kwargs):
         PostOnly(self.request)
         form = self.request.form
-        recurse = form.get('workflow_archive_recurse', False)
-        prev_versions = form.get('workflow_archive_previous_versions', False)
+        recurse = form.has_key('workflow_archive_recurse')
+        prev_versions = form.has_key('workflow_archive_previous_versions')
+        translations = form.has_key('workflow_archive_translations')
         val = {'initiator': form.get('workflow_archive_initiator', ''),
                'custom_message': form.get('workflow_other_reason', '').strip(),
                'reason': form.get('workflow_reasons_radio', 'other'),
@@ -42,16 +43,14 @@ class ArchiveContent(BrowserView):
         if ploneview.isDefaultPageInFolder():
             context = self.context.getParentNode()
 
-        if recurse and not prev_versions:
-            archive_obj_and_children(context, **val)
-        elif recurse and prev_versions:
-            archive_obj_and_children(context, **val)
-            archive_previous_versions(context, also_children=True, **val)
-        elif prev_versions and not recurse:
-            archive_object(context, **val)
-            archive_previous_versions(context, **val)
-        else:
-            archive_object(context, **val)
+        archive_object(context, **val)
+        if recurse:
+            archive_children(context, **val)
+        if prev_versions:
+            archive_previous_versions(context, also_children=recurse, **val)
+        if translations:
+            archive_translations(context, also_children=recurse,
+                also_versions=prev_versions, **val)
 
         return "OK"
 
@@ -63,28 +62,25 @@ class UnArchiveContent(BrowserView):
     def __call__(self, **kwargs):
         PostOnly(self.request)
         form = self.request.form
-        recurse = form.get('workflow_unarchive_recurse', False)
+        recurse = form.has_key('workflow_unarchive_recurse')
+        translations = form.has_key('workflow_unarchive_translations')
 
         context = self.context
         ploneview = getMultiAdapter((context, self.request), name='plone')
         if ploneview.isDefaultPageInFolder():
             context = self.context.getParentNode()
 
+        unarchive_object(context)
+        msg = "Object has been unarchived"
         if recurse:
-            catalog = getToolByName(context, 'portal_catalog')
-            query = {'path': '/'.join(context.getPhysicalPath())}
-            brains = catalog.searchResults(query)
-
-            for brain in brains:
-                obj = brain.getObject()
-                if IObjectArchived.providedBy(obj):
-                    storage = queryAdapter(obj, IObjectArchivator)
-                    storage.unarchive(obj)
+            unarchive_children(context)
             msg = "Object and contents have been unarchived"
-        else:
-            storage = queryAdapter(context, IObjectArchivator)
-            storage.unarchive(context)
-            msg = "Object has been unarchived"
+        if translations:
+            unarchive_translations(context, also_children=recurse)
+            if recurse:
+                msg = "Object, contents and translations have been unarchived"
+            else:
+                msg = "Object and translations have been unarchived"
 
         IStatusMessage(context.REQUEST).add(msg, 'info')
 

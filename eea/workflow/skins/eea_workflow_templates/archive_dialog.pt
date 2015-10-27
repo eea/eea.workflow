@@ -20,6 +20,10 @@
            id="workflow_archive_previous_versions" />
   <label for="workflow_archive_previous_versions">Include older versions of this item <span class="discreet">(recommended)</span></label>
   <br/>
+  <input name="workflow_archive_translations" type="checkbox" checked="checked" value="on"
+           id="workflow_archive_translations" />
+  <label for="workflow_archive_translations">Include translations <span class="discreet">(recommended)</span></label>
+  <br />
   <h3 id="workflow_initiator_label">Request Initiator:</h3>
   <label>Staff name who initially requested and/or approved this page to be archived/expired.</label>
   <br/>
