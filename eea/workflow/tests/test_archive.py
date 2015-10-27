@@ -89,14 +89,12 @@ class TestUnarchive(TestCase):
         fid = portal.invokeFactory("Folder", 'f1')
         self.folder = portal[fid]
         trans = self.folder.addTranslation('ro')
-        self.folder.addTranslationReference(trans)
         self.folder_ro = self.folder.getTranslation('ro')
         assert self.folder_ro.isTranslation() == True
         assert self.folder_ro.getLanguage() == 'ro'
         docid = self.folder.invokeFactory("Document", 'd1')
         self.doc = self.folder[docid]
         trans = self.doc.addTranslation('ro')
-        self.doc.addTranslationReference(trans)
         self.doc_ro = self.doc.getTranslation('ro')
         assert self.doc_ro.isTranslation() == True
         assert self.doc_ro.getLanguage() == 'ro'
