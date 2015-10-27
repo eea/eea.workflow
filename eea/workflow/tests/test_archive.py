@@ -95,17 +95,12 @@ class TestUnarchive(TestCase):
         assert self.folder_ro.getLanguage() == 'ro'
         docid = self.folder.invokeFactory("Document", 'd1')
         self.doc = self.folder[docid]
-
         trans = self.doc.addTranslation('ro')
         self.doc.addTranslationReference(trans)
         self.doc_ro = self.doc.getTranslation('ro')
         assert self.doc_ro.isTranslation() == True
         assert self.doc_ro.getLanguage() == 'ro'
         assert self.doc_ro.getTranslation() == self.doc
-
-        #print 'self.doc', self.doc, self.doc.getParentNode()
-        #print 'self.doc_ro', self.doc_ro, self.doc_ro.getParentNode()
-
         #archive content
         archive_object(self.folder)
         assert IObjectArchived.providedBy(self.folder)
