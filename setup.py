@@ -35,6 +35,9 @@ setup(name=NAME,
           'plone.protect',
           'Products.ATVocabularyManager',
       ],
+      extras_require={
+       'test': ['Products.LinguaPlone',]
+      },
       entry_points="""
       # -*- Entry points: -*-
       """,
