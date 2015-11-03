@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.4.dev0 - (unreleased)
------------------------
+8.4 - (2015-11-03)
+------------------
 * Feature: Archive should have an option to apply to all translations
   [chiridra refs #29050]
 
