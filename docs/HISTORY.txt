@@ -7,6 +7,7 @@ Changelog
   the contentMenuContent is now hidden when the async placeholder images
   is in place of the contentMenu
   [ichimdav refs #30066]
+
 8.4 - (2015-11-03)
 ------------------
 * Feature: Archive should have an option to apply to all translations
