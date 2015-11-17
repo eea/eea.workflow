@@ -1,5 +1,6 @@
 """ Doctests
 """
+import os
 import doctest
 import unittest
 from eea.workflow.tests.base import FunctionalTestCase as EEATestCase
@@ -15,6 +16,8 @@ OPTIONFLAGS = (
 def test_suite():
     """ Tests
     """
+    os.environ['PLONE_CSRF_DISABLED'] = 'true'
+
     return unittest.TestSuite((
             FunctionalDocFileSuite('README.txt',
                   optionflags=OPTIONFLAGS,
