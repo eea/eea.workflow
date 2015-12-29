@@ -114,7 +114,21 @@ PublishDialog.Window.prototype.handle_ok = function(e){
     jQuery(".questions").remove();
 
     jQuery("input[name='workflow_action']", self.target).attr('value', self.transition);
-    $form.submit();
+
+    jQuery.post($form.attr('action'), $form.serialize())
+          .done(function(data) {
+              var $response = $(data),
+                  $error_msgs = $response.find('.portalMessage'),
+                  $error_msg = $error_msgs.eq($error_msgs.length);
+              $error_msg.insertAfter($("#plone-document-byline"));
+              window.location.reload();
+          })
+          .fail(function(ev) {
+              var $response = $(ev.responseText),
+                  $error_msg = $response.find('.portalMessage.error');
+              $error_msg.insertAfter($("#plone-document-byline"));
+          });
+
     this.dialog.dialog("close");
     return false;
 
