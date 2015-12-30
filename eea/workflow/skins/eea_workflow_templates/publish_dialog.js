@@ -119,14 +119,18 @@ PublishDialog.Window.prototype.handle_ok = function(e){
           .done(function(data) {
               var $response = $(data),
                   $error_msgs = $response.find('.portalMessage'),
-                  $error_msg = $error_msgs.eq($error_msgs.length);
+                  $error_msg = $error_msgs.eq($error_msgs.length - 1);
               $error_msg.insertAfter($("#plone-document-byline"));
-              window.location.reload();
+              jQuery.post(window.context_url + '/' + 'workflow_menu').done(function(data){
+                  var async = new window.AsyncWorkflow();
+                  async.reinitialize(data);
+              });
           })
           .fail(function(ev) {
               var $response = $(ev.responseText),
                   $error_msg = $response.find('.portalMessage.error');
               $error_msg.insertAfter($("#plone-document-byline"));
+              $("#plone-contentmenu-workflow").html("Failure!");
           });
 
     this.dialog.dialog("close");

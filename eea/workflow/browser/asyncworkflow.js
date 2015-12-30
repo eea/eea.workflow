@@ -45,13 +45,15 @@ AsyncWorkflow.prototype.handle_click = function(e) {
     return false;
 };
 
-AsyncWorkflow.prototype.reinitialize = function(data) {
+AsyncWorkflow.prototype.reinitialize = function(data, removePreviousMessage) {
     var self = this;
     self.actionsMenu.html(data);
     var messages = self.actionsMenu.find(".portalMessage").detach();
     var $kss_message = jQuery("#kssPortalMessage");
-    $kss_message.next(".portalMessage").remove();
-    $kss_message.after(messages);
+    if (removePreviousMessage) {
+        $kss_message.next(".portalMessage").remove();
+        $kss_message.after(messages);
+    }
     window.initializeMenus();    //we need to reinitialize menus
     // reinitilize async logic on new content actions
     var async = new AsyncWorkflow();
@@ -68,7 +70,16 @@ AsyncWorkflow.prototype.execute = function(url) {
             "use strict";
             self.reinitialize(data);
         })
-        .fail(function() {
+        .fail(function(data) {
+            var $response = $(data.responseText),
+                $error_msg = $response.find('.portalMessage.error');
+            $error_msg.insertAfter($("#kssPortalMessage"));
+
+            // #31590 enable if we want to allow selecting another workflow after a failure
+            //jQuery.post(self.ajaxhandler).done(function(data) {
+            //    var remove_previous_message = false;
+            //    self.reinitialize(data, remove_previous_message);
+            //});
             self.menuHeader.html("Failure!");
         });
 };
