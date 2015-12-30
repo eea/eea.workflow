@@ -1,3 +1,4 @@
+/*global window, document, jQuery */
 /* EXTERNAL DEPENDENCIES:
  * plone_javascript_variables.js context_url
  * dropdown.js initializeMenus
@@ -72,7 +73,7 @@ AsyncWorkflow.prototype.execute = function(url) {
             self.reinitialize(data);
         })
         .fail(function(data) {
-            var $response = $(data.responseText),
+            var $response = jQuery(data.responseText),
                 $error_msg = $response.find('.portalMessage.error');
             $error_msg.insertAfter(self.kssMenu);
 
