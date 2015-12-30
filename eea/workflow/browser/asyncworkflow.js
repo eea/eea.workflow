@@ -45,21 +45,28 @@ AsyncWorkflow.prototype.handle_click = function(e) {
     return false;
 };
 
+AsyncWorkflow.prototype.reinitialize = function(data) {
+    var self = this;
+    self.actionsMenu.html(data);
+    var messages = self.actionsMenu.find(".portalMessage").detach();
+    var $kss_message = jQuery("#kssPortalMessage");
+    $kss_message.next(".portalMessage").remove();
+    $kss_message.after(messages);
+    window.initializeMenus();    //we need to reinitialize menus
+    // reinitilize async logic on new content actions
+    var async = new AsyncWorkflow();
+    async.initialize();
+    // trigger workflow menu refreshed events
+    jQuery(AsyncWorkflow.Events).trigger(AsyncWorkflow.Events.WORKFLOW_MENU_REFRESHED);
+
+};
+
 AsyncWorkflow.prototype.execute = function(url) {
     var self = this;
     jQuery.post(self.ajaxhandler, {'action_url': url})
         .done(function(data) {
-            self.actionsMenu.html(data);
-            var messages = self.actionsMenu.find(".portalMessage").detach();
-            var $kss_message = jQuery("#kssPortalMessage");
-            $kss_message.next(".portalMessage").remove();
-            $kss_message.after(messages);
-            window.initializeMenus();    //we need to reinitialize menus
-            // reinitilize async logic on new content actions
-            var async = new AsyncWorkflow();
-            async.initialize();
-            // trigger workflow menu refreshed events
-            jQuery(AsyncWorkflow.Events).trigger(AsyncWorkflow.Events.WORKFLOW_MENU_REFRESHED);
+            "use strict";
+            self.reinitialize(data);
         })
         .fail(function() {
             self.menuHeader.html("Failure!");
