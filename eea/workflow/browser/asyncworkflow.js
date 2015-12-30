@@ -10,6 +10,7 @@ function AsyncWorkflow() {
     this.menuHeader = jQuery(".actionMenuHeader", this.menu);
     this.submenu = jQuery(".actionMenuContent", this.menu);
     this.actionsMenu = jQuery(".contentActions");
+    this.kssMenu = jQuery("#kssPortalMessage");
     this.loadingImg = "<img src='" + window.context_url + "/eea-ajax-loader.gif' " +
         "alt='Changing state ...' title='Changing state ...' />";
 }
@@ -19,6 +20,7 @@ AsyncWorkflow.Events.WORKFLOW_MENU_REFRESHED = "ID-WORKFLOW_MENU_REFRESHED";
 
 AsyncWorkflow.prototype.initialize = function() {
     var self = this;
+    self.kssMenu.html(this.loadingImg);
     this.submenu.find('a').click(function(e) {
         return self.handle_click(e);
     });
@@ -49,10 +51,9 @@ AsyncWorkflow.prototype.reinitialize = function(data, removePreviousMessage) {
     var self = this;
     self.actionsMenu.html(data);
     var messages = self.actionsMenu.find(".portalMessage").detach();
-    var $kss_message = jQuery("#kssPortalMessage");
     if (removePreviousMessage) {
-        $kss_message.next(".portalMessage").remove();
-        $kss_message.after(messages);
+        self.kssMenu.next(".portalMessage").remove();
+        self.kssMenu.after(messages);
     }
     window.initializeMenus();    //we need to reinitialize menus
     // reinitilize async logic on new content actions
@@ -73,7 +74,7 @@ AsyncWorkflow.prototype.execute = function(url) {
         .fail(function(data) {
             var $response = $(data.responseText),
                 $error_msg = $response.find('.portalMessage.error');
-            $error_msg.insertAfter($("#kssPortalMessage"));
+            $error_msg.insertAfter(self.kssMenu);
 
             // #31590 enable if we want to allow selecting another workflow after a failure
             //jQuery.post(self.ajaxhandler).done(function(data) {

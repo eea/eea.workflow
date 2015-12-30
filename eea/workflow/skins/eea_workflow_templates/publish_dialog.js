@@ -1,6 +1,7 @@
 function PublishDialog(transitions){
     var self = this;
     this.transitions = transitions || ['publish'];
+    this.menu = jQuery("#plone-contentmenu-workflow");
     jQuery(AsyncWorkflow.Events).bind(
             AsyncWorkflow.Events.WORKFLOW_MENU_REFRESHED,
             function(evt, data){
@@ -130,10 +131,12 @@ PublishDialog.Window.prototype.handle_ok = function(e){
               var $response = $(ev.responseText),
                   $error_msg = $response.find('.portalMessage.error');
               $error_msg.insertAfter($("#plone-document-byline"));
-              $("#plone-contentmenu-workflow").html("Failure!");
+              self.menu.html("Failure!");
           });
 
     this.dialog.dialog("close");
+    self.menu.html("<img src='" + window.context_url + "/eea-ajax-loader.gif' " +
+        "alt='Changing state ...' title='Changing state ...' />");
     return false;
 
 };

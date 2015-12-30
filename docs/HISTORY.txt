@@ -3,6 +3,12 @@ Changelog
 
 8.8.dev0 - (unreleased)
 -----------------------
+* Change: Show error message when attempting to change workflow instead of
+  getting the normal plone error page
+  [ichimdav refs #31590]
+* Change: show loading image on first attempt at changing workflow.
+  Previously the loading image wasn't showing because it needed to load first
+  [ichimdav refs #31590]
 
 8.7 - (2015-12-07)
 ------------------
