@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.9.dev0 - (unreleased)
+-----------------------
+
 8.8 - (2016-01-04)
 ------------------
 * Change: Show error message when attempting to change workflow instead of
