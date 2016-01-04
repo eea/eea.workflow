@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.8.dev0 - (unreleased)
------------------------
+8.8 - (2016-01-04)
+------------------
 * Change: Show error message when attempting to change workflow instead of
   getting the normal plone error page
   [ichimdav refs #31590]
