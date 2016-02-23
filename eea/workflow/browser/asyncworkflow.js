@@ -52,7 +52,9 @@ AsyncWorkflow.prototype.reinitialize = function(data, removePreviousMessage) {
     var self = this;
     self.actionsMenu.html(data);
     var messages = self.actionsMenu.find(".portalMessage").detach();
-    if (removePreviousMessage) {
+    // 68228 show error message if we find it when calling the async workflow menu
+    var error_message = messages.filter('.error');
+    if (removePreviousMessage || error_message) {
         self.kssMenu.next(".portalMessage").remove();
         self.kssMenu.after(messages);
     }

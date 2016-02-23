@@ -3,6 +3,8 @@ Changelog
 
 8.9.dev0 - (unreleased)
 -----------------------
+* Bugfix: show error message if found when calling the async workflow menu
+  [ichimdav refs #68228]
 
 8.8 - (2016-01-04)
 ------------------
