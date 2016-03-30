@@ -3,6 +3,9 @@ Changelog
 
 9.0.dev0 - (unreleased)
 -----------------------
+* Bugfix: show error message before content as we might have templates
+  without documentByline such as edit pages
+  [ichimdav refs #69487]
 
 8.9 - (2016-03-01)
 ------------------

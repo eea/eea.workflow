@@ -1,7 +1,6 @@
 function PublishDialog(transitions){
     var self = this;
     this.transitions = transitions || ['publish'];
-    this.menu = jQuery("#plone-contentmenu-workflow");
     jQuery(AsyncWorkflow.Events).bind(
             AsyncWorkflow.Events.WORKFLOW_MENU_REFRESHED,
             function(evt, data){
@@ -62,6 +61,7 @@ PublishDialog.Window = function(transition){
     }
     this.target = $target;
     this.transition = transition;
+    this.menu = jQuery("#plone-contentmenu-workflow");
 };
 
 PublishDialog.Window.prototype.open = function(){
@@ -87,7 +87,6 @@ PublishDialog.Window.prototype.handle_cancel = function(e){
 };
 
 PublishDialog.Window.prototype.handle_ok = function(e){
-
     var self = this;
     var $questions_area = jQuery(".questions", this.target);
 
@@ -130,7 +129,7 @@ PublishDialog.Window.prototype.handle_ok = function(e){
           .fail(function(ev) {
               var $response = $(ev.responseText),
                   $error_msg = $response.find('.portalMessage.error');
-              $error_msg.insertAfter($("#plone-document-byline"));
+              $error_msg.insertBefore($("#content"));
               self.menu.html("Failure!");
           });
 
