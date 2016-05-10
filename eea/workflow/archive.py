@@ -2,23 +2,23 @@
 """
 
 import logging
-
-from DateTime import DateTime
-from Products.Five import BrowserView
-import transaction
-from Products.Archetypes.interfaces import IBaseObject
 from persistent import Persistent
-from zope.annotation.factory import factory
-from zope.component import adapts, queryAdapter
-from zope.interface import implements, alsoProvides, noLongerProvides
-from zope.event import notify
-from z3c.caching.purge import Purge
 
-from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+from zope.interface import implements, alsoProvides, noLongerProvides
+
+import transaction
+from DateTime import DateTime
+from Products.ATVocabularyManager import NamedVocabulary
+from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five import BrowserView
 from eea.versions.interfaces import IGetVersions
 from eea.workflow.interfaces import IObjectArchived, IObjectArchivator
-from Products.CMFPlone.utils import safe_unicode
+from z3c.caching.purge import Purge
+from zope.annotation.factory import factory
+from zope.component import adapts, queryAdapter
+from zope.event import notify
 
 
 class ObjectArchivedAnnotationStorage(Persistent):

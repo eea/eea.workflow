@@ -3,6 +3,8 @@ Changelog
 
 9.1.dev0 - (unreleased)
 -----------------------
+* Bug fix: Fix pylint warnings
+  [ichim-david refs #71940]
 
 9.0 - (2016-03-31)
 ------------------

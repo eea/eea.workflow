@@ -1,10 +1,11 @@
 """ Setuphandlers
 """
 
+import logging
+
 from Products.ATVocabularyManager.config import TOOL_NAME as ATVOCABULARYTOOL
 from Products.CMFCore.utils import getToolByName
 from eea.workflow.vocab import ATVOCABS
-import logging
 
 logger = logging.getLogger('eea.workflow.setuphandlers')
 

@@ -1,14 +1,17 @@
 """ Utils module
 """
+from logging import getLogger
+
+from zope.interface import Interface, implements
+
 from Products.Archetypes.Field import Field, TextField
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.UnicodeSplitter import process_unicode
 from eea.workflow.interfaces import IFieldIsRequiredForState, IValueProvider
 from zope.component import adapts
-from zope.interface import Interface, implements
-from logging import getLogger
 
 logger = getLogger('eea.workflow')
+
 
 class ATFieldValueProvider(object):
     """An IValueProvider implementation for AT Fields"""

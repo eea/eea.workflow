@@ -1,19 +1,19 @@
 """ eea.workflow actions
 """
 import logging
-from zope.component import adapts
-from zope.formlib import form
+
 from zope.interface import implements, Interface
 
 from OFS.SimpleItem import SimpleItem
-from plone.contentrules.rule.interfaces import IExecutable, IRuleElementData
+from Products.CMFPlone.utils import getToolByName
+from eea.versions.interfaces import IGetVersions
+from eea.workflow.interfaces import IObjectArchivator
+from eea.workflow.rules.interfaces import IArchiveUnarchiveAction
 from plone.app.contentrules.browser.formhelper import AddForm as PloneAddForm
 from plone.app.contentrules.browser.formhelper import EditForm as PloneEditForm
-from Products.CMFPlone.utils import getToolByName
-
-from eea.workflow.rules.interfaces import IArchiveUnarchiveAction
-from eea.workflow.interfaces import IObjectArchivator
-from eea.versions.interfaces import IGetVersions
+from plone.contentrules.rule.interfaces import IExecutable, IRuleElementData
+from zope.component import adapts
+from zope.formlib import form
 
 logger = logging.getLogger("eea.workflow.actions")
 

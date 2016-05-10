@@ -5,8 +5,9 @@ from eea.workflow.archive import archive_object, archive_children, \
     archive_obj_and_children, archive_previous_versions, \
     archive_translations, unarchive_object, unarchive_children, \
     unarchive_translations
-from eea.workflow.tests.base import TestCase
 from eea.workflow.interfaces import IObjectArchived
+from eea.workflow.tests.base import TestCase
+
 
 class TestArchive(TestCase):
     """ TestArchive TestCase class
@@ -25,6 +26,7 @@ class TestArchive(TestCase):
     def test_archive_object(self):
         """ Test the archival of the object
         """
+
         archive_object(self.folder)
         assert IObjectArchived.providedBy(self.folder)
 
@@ -90,13 +92,13 @@ class TestUnarchive(TestCase):
         self.folder = portal[fid]
         self.folder.addTranslation('ro')
         self.folder_ro = self.folder.getTranslation('ro')
-        assert self.folder_ro.isTranslation() == True
+        assert self.folder_ro.isTranslation() is True
         assert self.folder_ro.getLanguage() == 'ro'
         docid = self.folder.invokeFactory("Document", 'd1')
         self.doc = self.folder[docid]
         self.doc.addTranslation('ro')
         self.doc_ro = self.doc.getTranslation('ro')
-        assert self.doc_ro.isTranslation() == True
+        assert self.doc_ro.isTranslation() is True
         assert self.doc_ro.getLanguage() == 'ro'
         assert self.doc_ro.getTranslation() == self.doc
         #archive content

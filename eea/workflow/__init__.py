@@ -1,11 +1,12 @@
 """ Init
 """
-from Products.CMFCore import DirectoryView
 from zope.i18nmessageid import MessageFactory
+
+from Products.CMFCore import DirectoryView
+from eea.workflow import patches  #install patches for Products.CMFCore
 
 PortletReadinessMessageFactory = MessageFactory('eea.workflow')
 
-from eea.workflow import patches  #install patches for Products.CMFCore
 
 __all__ = [
         patches.__name__,
