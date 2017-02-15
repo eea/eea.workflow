@@ -26,6 +26,9 @@
     background-repeat:no-repeat;
     padding-left:20px;
 }
+.missingFields ul {
+    list-style-image: none;
+}
 
 /*
 </dtml-with>  (end of loaded base_properties variables)
