@@ -1,6 +1,9 @@
 Changelog
 =========
 
+9.3.dev0 - (unreleased)
+-----------------------
+
 9.2 - (2017-02-21)
 ------------------
 * Bug fix: fixed CSS for "Editing progress" portlet
