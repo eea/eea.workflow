@@ -5,7 +5,9 @@ import logging
 from persistent import Persistent
 
 from zope.interface import implements, alsoProvides, noLongerProvides
-
+from zope.annotation.factory import factory
+from zope.component import adapts, queryAdapter
+from zope.event import notify
 import transaction
 from DateTime import DateTime
 from Products.ATVocabularyManager import NamedVocabulary
@@ -16,9 +18,6 @@ from Products.Five import BrowserView
 from eea.versions.interfaces import IGetVersions
 from eea.workflow.interfaces import IObjectArchived, IObjectArchivator
 from z3c.caching.purge import Purge
-from zope.annotation.factory import factory
-from zope.component import adapts, queryAdapter
-from zope.event import notify
 
 
 class ObjectArchivedAnnotationStorage(Persistent):
