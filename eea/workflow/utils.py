@@ -3,12 +3,11 @@
 from logging import getLogger
 
 from zope.interface import Interface, implements
-
+from zope.component import adapts
 from Products.Archetypes.Field import Field, TextField
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.UnicodeSplitter import process_unicode
 from eea.workflow.interfaces import IFieldIsRequiredForState, IValueProvider
-from zope.component import adapts
 
 logger = getLogger('eea.workflow')
 
@@ -122,4 +121,3 @@ class ATFieldIsRequiredForState(object):
             return True
         ATTR = 'required_for_' + state
         return getattr(self.field, ATTR, False)
-

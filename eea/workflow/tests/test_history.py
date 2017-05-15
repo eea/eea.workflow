@@ -74,4 +74,3 @@ def test_suite():
     suite = TestSuite()
     suite.addTest(makeSuite(TestHistory))
     return suite
-

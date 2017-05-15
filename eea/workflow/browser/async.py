@@ -1,10 +1,10 @@
 """ Async
 """
+from urlparse import urlsplit
 from Products.Five import BrowserView
 from Products.statusmessages import STATUSMESSAGEKEY
 from Products.statusmessages.adapter import _decodeCookieValue
 from plone.app.layout.globals.interfaces import IViewView
-from urlparse import urlsplit
 from zope.interface import implements
 
 
@@ -50,5 +50,3 @@ class WorkflowMenu(BrowserView):
         self.cancel_redirect()
 
         return self.index()
-
-

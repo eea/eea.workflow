@@ -3,7 +3,8 @@
 import logging
 
 from zope.interface import implements, Interface
-
+from zope.component import adapts
+from zope.formlib import form
 from OFS.SimpleItem import SimpleItem
 from Products.CMFPlone.utils import getToolByName
 from eea.versions.interfaces import IGetVersions
@@ -12,8 +13,6 @@ from eea.workflow.rules.interfaces import IArchiveUnarchiveAction
 from plone.app.contentrules.browser.formhelper import AddForm as PloneAddForm
 from plone.app.contentrules.browser.formhelper import EditForm as PloneEditForm
 from plone.contentrules.rule.interfaces import IExecutable, IRuleElementData
-from zope.component import adapts
-from zope.formlib import form
 
 logger = logging.getLogger("eea.workflow.actions")
 

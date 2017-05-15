@@ -36,4 +36,3 @@ def setupATVocabularies(context):
         simple = atvm.getVocabularyByName(vkey)
         for (key, val) in ATVOCABS[vkey]:
             simple.addTerm(key, val)
-
