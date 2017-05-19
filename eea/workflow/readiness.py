@@ -74,7 +74,7 @@ class ObjectReadiness(object):
 
         generic_adapter = queryAdapter(self.context, IRequiredFieldsForState,
                 name=state_name)
-        required_fields = generic_adapter and generic_adapter.fields or []
+        required_fields = generic_adapter.fields if generic_adapter else []
 
         if not getattr(self.context, 'schema'):
             info = {

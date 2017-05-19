@@ -24,7 +24,7 @@ def setupATVocabularies(context):
     if atvm is None:
         return
 
-    for vkey in ATVOCABS.keys():
+    for vkey in ATVOCABS:
         if hasattr(atvm, vkey):
             if not replace:
                 continue

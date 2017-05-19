@@ -102,7 +102,7 @@ class ObjectArchivedAnnotationStorage(Persistent):
         if not has_workflow:
             # NOP
             return
-        date = archive_date and archive_date or DateTime()
+        date = archive_date if archive_date else DateTime()
         alsoProvides(context, IObjectArchived)
         context.setExpirationDate(date)
 

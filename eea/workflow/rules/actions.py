@@ -43,8 +43,7 @@ class ArchiveUnarchiveAction(SimpleItem):
             msg = msg_template % ("Previous object version and it's children")
         if self.action:
             return msg
-        else:
-            return "Not configured"
+        return "Not configured"
 
 
 class ArchiveUnarchiveExecutor(object):

@@ -35,5 +35,5 @@ class UnArchiveViewlet(ViewletBase):
     def update(self):
         """ Update viewlet
         """
-        self.is_archived = IObjectArchived.providedBy(self.context) \
-                                and "true" or "false"
+        self.is_archived = "true" if IObjectArchived.providedBy(self.context) \
+            else "false"
