@@ -19,15 +19,6 @@ docker rm -v $NAME'''
             }
           },
 
-          "KGS": {
-            node(label: 'docker-1.13') {
-              sh '''
-NAME="$BUILD_TAG-kgs"
-docker run -i --net=host --name="$NAME" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" eeacms/kgs-devel /debug.sh bin/test --test-path /plone/instance/src/$GIT_NAME -v -vv -s $GIT_NAME
-docker rm -v $NAME'''
-            }
-          },
-
           "Plone4": {
             node(label: 'docker-1.13') {
               sh '''
@@ -212,4 +203,4 @@ docker rm -v $NAME'''
       }
     }
   }
-}            
+}
