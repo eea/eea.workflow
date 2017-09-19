@@ -4,21 +4,21 @@
   i18n:domain="eea">
 
   <tal:comment replace="nothing">
-    This template should actually be a portlet. It is separated like this to 
+    This template should actually be a portlet. It is separated like this to
     enable reusing it in eea.indicators
   </tal:comment>
 
     <metal:macro metal:define-macro="portlet" >
       <tal:def tal:define="enable view/enabled">
-        <tal:defs tal:define="api nocall:context/@@get_readiness | nothing; 
+        <tal:defs tal:define="api nocall:context/@@get_readiness | nothing;
                               iinfo context/@@plone_interface_info;
                               ispecification string:eea.indicators.content.interfaces.ISpecification;
                               iassessment string:eea.indicators.content.interfaces.IAssessment;
                               has_agg_view python: iinfo.provides(ispecification) or iinfo.provides(iassessment);
                               edit_view python:has_agg_view and '@@edit_aggregated' or 'edit';
-                              has_permission python:context.portal_membership.checkPermission('Modify portal content', context)" 
+                              has_permission python:context.portal_membership.checkPermission('Modify portal content', context)"
           tal:condition="python:enable and api and has_permission" >
-          <dl class="portlet" id="readiness-status" 
+          <dl class="portlet" id="readiness-status"
             tal:define="info python:api.get_info_for('published');
             extra info/extra">
 
@@ -35,10 +35,10 @@
 
             <dt class="portletItem missingRequired"
               tal:define="totmiss python:info['rfs_required'] - info['rfs_with_value'] - len(info['extra'])"
-              tal:condition="totmiss">
-              <span class="missingRequiredNr" tal:content="totmiss" />
+              tal:condition="totmiss" i18n:translate="">
+              <span class="missingRequiredNr" tal:content="totmiss" i18n:name="miss" />
               of
-              <span tal:content="python:info['rfs_required']" />
+              <span tal:content="python:info['rfs_required']" i18n:name="info"/>
               required fields are missing
             </dt>
 
@@ -49,7 +49,7 @@
                   <ul class="unfinished">
                     <li tal:repeat="field info/rfs_field_names" >
                       <a href="#rfs_title" tal:attributes="href string:${edit_view}#rfs_${name}"
-                         tal:content="label" 
+                         tal:content="label"
                          tal:define="name python:field[0]; label python:field[1]">Field</a>
                     </li>
                   </ul>
@@ -60,7 +60,7 @@
                       tal:content="structure python:entry[1]">Something here</div>
                   </tal:rep>
                 </div>
-                <p tal:condition="python: not extra and not info['rfs_field_names']">
+                <p tal:condition="python: not extra and not info['rfs_field_names']" i18n:translate="">
                   Everything is done.
                 </p>
               </div>
@@ -75,7 +75,7 @@
                     </li>
                   </ul>
                 </div>
-                <p class="missingFields" tal:condition="not: info/rfs_done_field_names">
+                <p class="missingFields" tal:condition="not: info/rfs_done_field_names" i18n:translate="">
                   Nothing done yet.
                 </p>
               </div>
@@ -87,8 +87,8 @@
               <!--</dt>-->
 
             <dd class="portletFooter">
-              <a href="" 
-                tal:attributes="href string:${context/absolute_url}/edit" 
+              <a href=""
+                tal:attributes="href string:${context/absolute_url}/edit"
                 title="" class="moreLink" >
                 <span i18n:translate="">Edit</span>
               </a>

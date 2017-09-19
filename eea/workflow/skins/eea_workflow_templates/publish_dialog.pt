@@ -7,7 +7,7 @@
   </div>
 
   <tal:ver tal:omit-tag="" tal:define="
-    versions_api nocall:context/@@getVersions; 
+    versions_api nocall:context/@@getVersions;
     newer versions_api/later_versions;
     readiness_view nocall:context/@@get_readiness | nothing">
 
@@ -48,12 +48,12 @@
             </tr>
           </tbody>
         </table>
-        
+
         <p i18n:translate="">
             Choose manual publication date. We recommend something close to the date below,
             which is 30 days after the item was initially created.
         </p>
-     
+
         <link type="text/css" rel="stylesheet" media="all"
             tal:define="src string:${context/portal_url}/jscalendar/calendar-system.css;" tal:attributes="href src" />
         <script type="text/javascript"
@@ -68,7 +68,7 @@
 
     </div>
 
-    <p tal:condition="python:readiness_view and not readiness_view.is_ready_for('published')">
+    <p tal:condition="python:readiness_view and not readiness_view.is_ready_for('published')" i18n:translate="">
       This item is not yet ready to be published!
     </p>
 

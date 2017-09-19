@@ -1,31 +1,31 @@
 <form method="POST" action="" tal:attributes="action string:${context/absolute_url}/@@archive_content">
-  <p>Note: this page will be watermarked as "Archived" and a message with a reason will be displayed to the web visitor</p>
-  <h3 id="workflow_reason_label">Reason:</h3>
-  <label>Reason message to be displayed</label><br/>
+  <p i18n:translate="">Note: this page will be watermarked as "Archived" and a message with a reason will be displayed to the web visitor</p>
+  <h3 id="workflow_reason_label" i18n:translate="">Reason:</h3>
+  <label i18n:translate="">Reason message to be displayed</label><br/>
   <tal:block tal:define="reasons context/@@workflow_reasons">
     <tal:block tal:repeat="reason python:reasons.keys()">
       <input name="workflow_reasons_radio" type="radio" tal:attributes="value reason" />
       <tal:block tal:content="python: reasons[reason]"></tal:block><br/>
     </tal:block>
   </tal:block>
-  <input name="workflow_reasons_radio" type="radio" value="other"/> Other:
-  <input name="workflow_other_reason" type="text" placeholder="custom message"/><br/>
+  <input name="workflow_reasons_radio" type="radio" value="other" /><tal:o i18n:translate="">Other:</tal:o>
+  <input name="workflow_other_reason" type="text" placeholder="custom message" i18n:attributes="placeholder"/><br/>
 
-  <h3 id="workflow_target_label">Included archived items:</h3>
+  <h3 id="workflow_target_label" i18n:translate="">Included archived items:</h3>
   <input name="workflow_archive_recurse" type="checkbox" checked="checked" value="on"
          id="workflow_archive_recurse" />
-  <label for="workflow_archive_recurse">Include contained items <span class="discreet">(recommended)</span></label>
+  <label for="workflow_archive_recurse" i18n:translate="">Include contained items <span class="discreet" i18n:translate="">(recommended)</span></label>
   <br/>
   <input name="workflow_archive_previous_versions" type="checkbox" checked="checked" value="on"
            id="workflow_archive_previous_versions" />
-  <label for="workflow_archive_previous_versions">Include older versions of this item <span class="discreet">(recommended)</span></label>
+  <label for="workflow_archive_previous_versions" i18n:translate="">Include older versions of this item <span class="discreet" i18n:translate="">(recommended)</span></label>
   <br/>
   <input name="workflow_archive_translations" type="checkbox" checked="checked" value="on"
            id="workflow_archive_translations" />
-  <label for="workflow_archive_translations">Include translations <span class="discreet">(recommended)</span></label>
+  <label for="workflow_archive_translations" i18n:translate="">Include translations <span class="discreet" i18n:translate="">(recommended)</span></label>
   <br />
-  <h3 id="workflow_initiator_label">Request Initiator:</h3>
-  <label>Staff name who initially requested and/or approved this page to be archived/expired.</label>
+  <h3 id="workflow_initiator_label" i18n:translate="">Request Initiator:</h3>
+  <label i18n:translate="">Staff name who initially requested and/or approved this page to be archived/expired.</label>
   <br/>
   <input type="text" style="width:400px" name="workflow_archive_initiator" />
   <div style="text-align: center; display: none" id="archiving_preloader">
