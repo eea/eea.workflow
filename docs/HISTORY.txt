@@ -3,6 +3,9 @@ Changelog
 
 9.9.dev0 - (unreleased)
 -----------------------
+* Feature: archive/unarchive action now properly trigger a modified object
+  event and the ping_cr is executed.
+  [alecghica refs #90685]
 
 9.8 - (2017-12-12)
 ------------------
