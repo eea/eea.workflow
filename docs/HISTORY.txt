@@ -1,8 +1,14 @@
 Changelog
 =========
 
-9.8.dev0 - (unreleased)
------------------------
+9.9 - (2017-12-18)
+------------------
+* Feature: archive/unarchive action now properly trigger a modified object
+  event and the ping_cr is executed.
+  [alecghica refs #90685]
+
+9.8 - (2017-12-12)
+------------------
 * Change: Replace eeacms/zptlint with eeacms/plone-test:4 zptlint
   [avoinea refs #90415]
 

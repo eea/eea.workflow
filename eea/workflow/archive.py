@@ -8,6 +8,7 @@ from zope.interface import implements, alsoProvides, noLongerProvides
 from zope.annotation.factory import factory
 from zope.component import adapts, queryAdapter
 from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 import transaction
 from DateTime import DateTime
 from Products.ATVocabularyManager import NamedVocabulary
@@ -82,6 +83,7 @@ class ObjectArchivedAnnotationStorage(Persistent):
         context.workflow_history._p_changed = True
         context.reindexObject()
         notify(Purge(context))
+        notify(ObjectModifiedEvent(context))
 
     def archive(self, context, initiator=None, reason=None, custom_message=None,
                 archive_date=None):
@@ -145,6 +147,7 @@ class ObjectArchivedAnnotationStorage(Persistent):
         context.workflow_history._p_changed = True
         context.reindexObject()
         notify(Purge(context))
+        notify(ObjectModifiedEvent(context))
 
 
 archive_annotation_storage = factory(ObjectArchivedAnnotationStorage,
