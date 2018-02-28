@@ -18,7 +18,6 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from eea.versions.interfaces import IGetVersions
 from eea.workflow.interfaces import IObjectArchived, IObjectArchivator
-from z3c.caching.purge import Purge
 
 
 class ObjectArchivedAnnotationStorage(Persistent):
@@ -81,8 +80,6 @@ class ObjectArchivedAnnotationStorage(Persistent):
             context.workflow_history[wfname] = history
 
         context.workflow_history._p_changed = True
-        context.reindexObject()
-        notify(Purge(context))
         notify(ObjectModifiedEvent(context))
 
     def archive(self, context, initiator=None, reason=None, custom_message=None,
@@ -145,8 +142,6 @@ class ObjectArchivedAnnotationStorage(Persistent):
             context.workflow_history[wfname] = history
 
         context.workflow_history._p_changed = True
-        context.reindexObject()
-        notify(Purge(context))
         notify(ObjectModifiedEvent(context))
 
 
