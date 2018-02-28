@@ -80,6 +80,7 @@ class ObjectArchivedAnnotationStorage(Persistent):
             context.workflow_history[wfname] = history
 
         context.workflow_history._p_changed = True
+        context.reindexObject()
         notify(ObjectModifiedEvent(context))
 
     def archive(self, context, initiator=None, reason=None, custom_message=None,
@@ -142,6 +143,7 @@ class ObjectArchivedAnnotationStorage(Persistent):
             context.workflow_history[wfname] = history
 
         context.workflow_history._p_changed = True
+        context.reindexObject()
         notify(ObjectModifiedEvent(context))
 
 
