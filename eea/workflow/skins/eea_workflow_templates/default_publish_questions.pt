@@ -5,7 +5,7 @@
 <p i18n:translate="">Indicators have different procedures and approvals before publishing, depending 
   if they are CSI or not. Please see
     <span i18n:name="indicators_details"> 
-      <a href="http://taskman.eionet.europa.eu/projects/zope/wiki/IndicatorsUserGuideProcedures" 
+      <a href="https://taskman.eionet.europa.eu/projects/zope/wiki/IndicatorsUserGuideProcedures" 
         target="_new" i18n:translate="">indicators procedures for more details.</a>
     </span>        
 </p> 

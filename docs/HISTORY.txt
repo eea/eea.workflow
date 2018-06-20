@@ -1,6 +1,11 @@
 Changelog
 =========
 
+10.1-dev0 - (unreleased)
+---------------------
+* Change: updated URLs pointing to eea.europa.eu with https://
+  [alecghica refs #95849]
+
 10.0 - (2018-02-28)
 -------------------
 * Bug fix: Remove redundant Varnish purge on archive/unarchive
