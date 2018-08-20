@@ -21,8 +21,8 @@
   <label for="workflow_archive_previous_versions" i18n:translate="">Include older versions of this item <span class="discreet" i18n:translate="">(recommended)</span></label>
   <br/>
   <input name="workflow_archive_translations" type="checkbox" checked="checked" value="on"
-           id="workflow_archive_translations" />
-  <label for="workflow_archive_translations" i18n:translate="">Include translations <span class="discreet" i18n:translate="">(recommended)</span></label>
+           id="workflow_archive_translations" disabled />
+  <label for="workflow_archive_translations" i18n:translate="">Include translations</label>
   <br />
   <h3 id="workflow_initiator_label" i18n:translate="">Request Initiator:</h3>
   <label i18n:translate="">Staff name who initially requested and/or approved this page to be archived/expired.</label>

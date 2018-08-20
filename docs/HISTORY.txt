@@ -3,6 +3,9 @@ Changelog
 
 10.2-dev0 - (unreleased)
 ---------------------
+* Bug fix: updated the archive/un-archive dialog to make clear all
+  translations are affected.
+  [alecghica refs #96097]
 
 10.1 - (2018-06-20)
 ---------------------
