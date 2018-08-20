@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.2-dev0 - (unreleased)
+10.2 - (2018-08-20)
 ---------------------
 * Bug fix: updated the archive/un-archive dialog to make clear all
   translations are affected.
