@@ -10,7 +10,7 @@ function set_resolveuids(){
 		var uid = text.slice(uid_start + 5, uid_end);
 		var msg = text.slice(0, uid_start);
 
-		var base = jQuery('body').data('base-url') || jQuery("base").attr('href') || document.baseURI || window.location.href.split("?")[0];
+		var base = $('body').data('base-url') || $("base").attr('href') || document.baseURI || window.location.href.split("?")[0];
 		var node = $("<a>").attr('href', base+'/resolveuid/' + uid).text("original");
 		var div = $("<span>").text(msg);
 		div.append(node);

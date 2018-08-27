@@ -141,7 +141,7 @@ $(function () {
         };
 
         function get_base() {
-            var base = (window.context_url || jQuery('body').data('base-url') || jQuery("base").attr('href') || document.baseURI ||
+            var base = (window.context_url || $('body').data('base-url') || $("base").attr('href') || document.baseURI ||
                         window.location.href.split("?")[0].split('@@')[0]);
             return base;
         }
