@@ -3,6 +3,8 @@ Changelog
 
 10.2 - (2018-08-20)
 ---------------------
+* Change: Get base-url from body data `base-url`
+  [avoinea refs #97843]
 * Bug fix: updated the archive/un-archive dialog to make clear all
   translations are affected.
   [alecghica refs #96097]
