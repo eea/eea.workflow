@@ -7,7 +7,7 @@
   <label for="workflow_unarchive_recurse" i18n:translate="">Also unarchive all archived children/content of this object, if any</label>
   <br/>
   <input name="workflow_unarchive_translations" type="checkbox" checked="checked" value="on"
-         id="workflow_unarchive_translations" />
+         id="workflow_unarchive_translations" disabled />
   <label for="workflow_unarchive_translations" i18n:translate="">Also unarchive all translations of this object, if any</label>
   <br />
   <div style="text-align: center; display: none" id="unarchiving_preloader">
