@@ -1,6 +1,11 @@
 Changelog
 =========
 
+10.3 - (2019-01-28)
+---------------------
+* Jenkins: Add sonarqube step
+  [avoinea refs #101552]
+
 10.2 - (2018-08-20)
 ---------------------
 * Change: Get base-url from body data `base-url`
