@@ -1,6 +1,6 @@
 /*global window, document, jQuery */
 /* EXTERNAL DEPENDENCIES:
- * plone_javascript_variables.js context_url
+ * plone_javascript_variables.js context_url portal_url
  * dropdown.js initializeMenus
  *  */
 
@@ -12,7 +12,7 @@ function AsyncWorkflow() {
     this.submenu = jQuery(".actionMenuContent", this.menu);
     this.actionsMenu = jQuery(".contentActions");
     this.kssMenu = jQuery("#kssPortalMessage");
-    this.loadingImg = "<img src='" + window.context_url + "/eea-ajax-loader.gif' " +
+    this.loadingImg = "<img src='" + window.portal_url + "/eea-ajax-loader.gif' " +
         "alt='Changing state ...' title='Changing state ...' />";
 }
 
