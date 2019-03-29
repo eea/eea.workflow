@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.4-dev0 - (unreleased)
+10.4 - (2019-03-29)
 ---------------------
 * Change: loading gif is now requested from portal_url instead of context_url.
   When loading from rules or browserViews the image loading failed
