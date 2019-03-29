@@ -1,6 +1,12 @@
 Changelog
 =========
 
+10.4 - (2019-03-29)
+---------------------
+* Change: loading gif is now requested from portal_url instead of context_url.
+  When loading from rules or browserViews the image loading failed
+  [ichim-dvid refs #102965]
+
 10.3 - (2019-01-28)
 ---------------------
 * Jenkins: Add sonarqube step
