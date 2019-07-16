@@ -152,7 +152,10 @@ PublishDialog.Window.prototype._open = function(ui){
         //see if all radios have a value. When they do, activate the Ok button
         jQuery(".questions input[type='radio']", self.target).change(function(){
             var questions = jQuery(".question", self.target);
-            var activated = jQuery(":checked", self.target);
+            // #107760 count activated checked options from questions since
+            // we can have more radio buttons in case there are other published
+            // items and we get the publishing date section
+            var activated = jQuery(":checked", questions);
             var okbtn = self.getDialogButton('Ok');
             if (questions.length === activated.length) {
                 jQuery(okbtn).removeAttr('disabled').removeClass('ui-state-disabled');

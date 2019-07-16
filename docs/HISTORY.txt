@@ -3,6 +3,11 @@ Changelog
 
 10.5-dev0 - (unreleased)
 ---------------------
+* Bug fix: use questions radio inputs when checking for activated radio buttons
+  when using the publishing dialog popup. In case there is a newer publishing
+  version we get an extra section with calendar selection which has radio inputs
+  therefore we never get the ok button enabled.
+  [ichim-david refs #107760]
 
 10.4 - (2019-03-29)
 ---------------------
