@@ -2,7 +2,7 @@ Changelog
 =========
 
 10.5-dev0 - (unreleased)
----------------------
+--------------------------
 * Bug fix: use questions radio inputs when checking for activated radio buttons
   when using the publishing dialog popup. In case there is a newer publishing
   version we get an extra section with calendar selection which has radio inputs
@@ -10,18 +10,18 @@ Changelog
   [ichim-david refs #107760]
 
 10.4 - (2019-03-29)
----------------------
+--------------------------
 * Change: loading gif is now requested from portal_url instead of context_url.
   When loading from rules or browserViews the image loading failed
   [ichim-dvid refs #102965]
 
 10.3 - (2019-01-28)
----------------------
+--------------------------
 * Jenkins: Add sonarqube step
   [avoinea refs #101552]
 
 10.2 - (2018-08-20)
----------------------
+--------------------------
 * Change: Get base-url from body data `base-url`
   [avoinea refs #97843]
 * Bug fix: updated the archive/un-archive dialog to make clear all
@@ -29,7 +29,7 @@ Changelog
   [alecghica refs #96097]
 
 10.1 - (2018-06-20)
----------------------
+--------------------------
 * Change: updated URLs pointing to eea.europa.eu with https://
   [alecghica refs #95849]
 
