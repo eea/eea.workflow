@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.5-dev0 - (unreleased)
+10.5 - (2019-08-08)
 --------------------------
 * Bug fix: use questions radio inputs when checking for activated radio buttons
   when using the publishing dialog popup. In case there is a newer publishing
