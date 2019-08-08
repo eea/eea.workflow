@@ -1,6 +1,9 @@
 Changelog
 =========
 
+10.6-dev0 - (unreleased)
+---------------------------
+
 10.5 - (2019-08-08)
 --------------------------
 * Bug fix: use questions radio inputs when checking for activated radio buttons
