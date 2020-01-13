@@ -1,9 +1,12 @@
 """ Events for eea.workflow
 """
 from Products.Archetypes.utils import shasattr
+from Products.CMFCore.utils import getToolByName
 from zope.component.interfaces import IObjectEvent
 from zope.component.interfaces import ObjectEvent
+from zope.component import getMultiAdapter
 from zope.interface import implements
+import datetime
 
 #Order of events triggering when an object is versioned:
 #initial state creation -> object copied -> object cloned -> object versioned
@@ -21,6 +24,7 @@ class InitialStateCreatedEvent(ObjectEvent):
 INITIAL_ITEM_CREATION = "Initial item creation"
 NEW_VERSION = "New version"
 COPIED = "Copied"
+UNARCHIVE = "Unarchive"
 
 
 def handle_workflow_initial_state_created(obj, event):
@@ -113,4 +117,38 @@ def handle_version_created(obj, event):
         wf_entries[-1]['action'] = NEW_VERSION
         wf_entries[-1]['comments'] = "New version created based on (uid:%s)" \
                 % event.original.UID()
+        history[name] = tuple(wf_entries)
+
+
+def handle_object_expiration_removed(obj, event):
+    """ Handler for object modified event to remove archive interface
+    """
+
+    if not obj is event.object:
+        #the event is being dispatched to sublocations
+        return
+
+    time = datetime.now()
+
+    plone = getMultiAdapter((obj, obj.REQUEST), name="plone")
+    now = plone.toLocalizedTime(time)
+
+    portal_membership = getToolByName(obj, 'portal_membership')
+
+    member = portal_membership.getAuthenticatedMember()
+    username = member.getUserName()
+
+    history = obj.workflow_history   #this is a persistent mapping
+
+    for name, wf_entries in history.items():
+        wf_entries = list(wf_entries)
+
+        #initial creation entry has no action id
+        if wf_entries[-1]['action'] != None:
+            return
+
+        wf_entries[-1]['action'] = UNARCHIVE
+        wf_entries[-1]['comments'] = "Unarchived by %s  on %s  by" \
+                "request from None with reason: Expiration Date was removed" \
+                                     % (username, now)
         history[name] = tuple(wf_entries)
