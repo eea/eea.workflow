@@ -3,6 +3,8 @@ Changelog
 
 10.7-dev0 - (unreleased)
 ---------------------------
+* Change: unarchive object if expiration date is removed when editing object
+  [ichim-david refs #112578]
 
 10.6 - (2019-10-28)
 ---------------------------
