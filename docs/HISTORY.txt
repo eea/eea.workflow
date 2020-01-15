@@ -1,6 +1,9 @@
 Changelog
 =========
 
+10.8-dev0 - (unreleased)
+---------------------------
+
 10.7 - (2020-01-14)
 ---------------------------
 * Change: unarchive object if expiration date is removed when editing object
