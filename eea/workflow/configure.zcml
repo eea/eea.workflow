@@ -75,6 +75,12 @@
              zope.lifecycleevent.interfaces.IObjectCopiedEvent"
         handler="eea.workflow.events.handle_object_copied" />
 
+  <subscriber
+    for="Products.Archetypes.interfaces.IBaseContent
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler="eea.workflow.events.handle_object_expiration_removed" />
+
+
     <subscriber
         for="Products.Archetypes.interfaces.IBaseContent
              OFS.interfaces.IObjectClonedEvent"
