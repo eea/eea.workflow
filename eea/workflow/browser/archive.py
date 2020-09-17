@@ -1,12 +1,10 @@
 """ Archival views
 """
-
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from zope.component import getMultiAdapter
 from plone.protect import PostOnly
-
 from eea.workflow.archive import archive_object, archive_previous_versions, \
     archive_children, archive_translations, \
     unarchive_object, unarchive_children, unarchive_translations

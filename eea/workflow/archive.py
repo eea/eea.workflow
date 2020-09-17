@@ -1,9 +1,7 @@
 """ IObjectArchived implementation
 """
-
 import logging
 from persistent import Persistent
-
 from zope.interface import implements, alsoProvides, noLongerProvides
 from zope.annotation.factory import factory
 from zope.component import adapts, queryAdapter
