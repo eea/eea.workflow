@@ -185,7 +185,8 @@ def archive_children(context, **kwargs):
         obj = brain.getObject()
         if obj == context:
             continue
-        storage = queryAdapter(obj, IObjectArchivator)
+        storage = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+                IObjectArchivator, name='annotation_storage_dexterity')
         if not storage:
             continue
         storage.archive(obj, **kwargs)
@@ -206,7 +207,8 @@ def unarchive_children(context):
         if obj == context:
             continue
         if IObjectArchived.providedBy(obj):
-            storage = queryAdapter(obj, IObjectArchivator)
+            storage = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+                    IObjectArchivator, name='annotation_storage_dexterity')
             storage.unarchive(obj)
             affected_objects.append(obj)
     return affected_objects
