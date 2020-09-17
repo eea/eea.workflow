@@ -3,6 +3,8 @@ Changelog
 
 10.8-dev0 - (unreleased)
 ---------------------------
+* Bug fix: Fixed archiving dexterity items when archiving children
+  [iulianpetchesi refs #118852]
 
 10.7 - (2020-01-14)
 ---------------------------

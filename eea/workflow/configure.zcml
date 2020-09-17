@@ -65,47 +65,51 @@
         for="Products.Archetypes.interfaces.IBaseContent
              eea.workflow.events.IInitialStateCreatedEvent"
         handler="eea.workflow.events.handle_workflow_initial_state_created" />
+
     <subscriber
-      for="plone.dexterity.interfaces.IDexterityContent
-           eea.workflow.events.IInitialStateCreatedEvent"
-       zcml:condition="installed plone.dexterity.content"
-      handler="eea.workflow.events.handle_workflow_initial_state_created" />
+        for="plone.dexterity.interfaces.IDexterityContent
+             eea.workflow.events.IInitialStateCreatedEvent"
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_workflow_initial_state_created" />
 
     <subscriber
         for="Products.Archetypes.interfaces.IBaseContent
              eea.versions.interfaces.IVersionCreatedEvent"
         handler="eea.workflow.events.handle_version_created" />
+
     <subscriber
-      for="plone.dexterity.interfaces.IDexterityContent
-               eea.versions.interfaces.IVersionCreatedEvent"
-      zcml:condition="installed plone.dexterity.content"
-      handler="eea.workflow.events.handle_version_created" />
+        for="plone.dexterity.interfaces.IDexterityContent
+             eea.versions.interfaces.IVersionCreatedEvent"
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_version_created" />
 
     <subscriber
         for="Products.Archetypes.interfaces.IBaseContent
              zope.lifecycleevent.interfaces.IObjectCopiedEvent"
         handler="eea.workflow.events.handle_object_copied" />
+
     <subscriber
       for="plone.dexterity.interfaces.IDexterityContent
            zope.lifecycleevent.interfaces.IObjectCopiedEvent"
-      zcml:condition="installed plone.dexterity.content"
-      handler="eea.workflow.events.handle_object_copied" />
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_object_copied" />
 
-  <subscriber
-    for="Products.Archetypes.interfaces.IBaseContent
+    <subscriber
+        for="Products.Archetypes.interfaces.IBaseContent
              zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler="eea.workflow.events.handle_object_expiration_removed" />
-  <subscriber
-    for="plone.dexterity.interfaces.IDexterityContent
+        handler="eea.workflow.events.handle_object_expiration_removed" />
+
+    <subscriber
+        for="plone.dexterity.interfaces.IDexterityContent
              zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    zcml:condition="installed plone.dexterity.content"
-    handler="eea.workflow.events.handle_object_expiration_removed" />
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_object_expiration_removed" />
 
-
-  <subscriber
-    for="Products.Archetypes.interfaces.IBaseContent
+    <subscriber
+        for="Products.Archetypes.interfaces.IBaseContent
              OFS.interfaces.IObjectClonedEvent"
-    handler="eea.workflow.events.handle_object_cloned" />
+        handler="eea.workflow.events.handle_object_cloned" />
+
     <subscriber
         for="plone.dexterity.interfaces.IDexterityContent
              OFS.interfaces.IObjectClonedEvent"
@@ -113,13 +117,14 @@
         handler="eea.workflow.events.handle_object_cloned" />
 
     <adapter
-      factory=".archive.archive_annotation_storage"
-      provides="eea.workflow.interfaces.IObjectArchivator"
-      for="Products.Archetypes.interfaces.IBaseContent" />
+        factory=".archive.archive_annotation_storage"
+        provides="eea.workflow.interfaces.IObjectArchivator"
+        for="Products.Archetypes.interfaces.IBaseContent" />
+
     <adapter
-      for="plone.dexterity.interfaces.IDexterityContent"
-      provides="eea.workflow.interfaces.IObjectArchivator"
-      factory=".archive.archive_annotation_storage"
-      name="annotation_storage_dexterity" />
+        factory=".archive.archive_annotation_storage"
+        provides="eea.workflow.interfaces.IObjectArchivator"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        name="annotation_storage_dexterity" />
 
 </configure>
