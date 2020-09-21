@@ -3,7 +3,7 @@
 import logging
 
 from zope.interface import implements, Interface
-from zope.component import adapts
+from zope.component import adapts, queryAdapter
 from zope.formlib import form
 from OFS.SimpleItem import SimpleItem
 from Products.CMFPlone.utils import getToolByName
@@ -95,7 +95,8 @@ class ArchiveUnarchiveExecutor(object):
         if self.element.applyRecursively:
             self.recursive_action(obj, rec_action, val)
         else:
-            adapter = IObjectArchivator(obj)
+            adapter = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+                    IObjectArchivator, name='annotation_storage_dexterity')
             if action == "archived":
                 adapter.archive(obj, **val)
             else:
@@ -112,7 +113,8 @@ class ArchiveUnarchiveExecutor(object):
         brains = catalog.searchResults(query)
         for brain in brains:
             obj = brain.getObject()
-            storage = IObjectArchivator(obj)
+            storage = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+                    IObjectArchivator, name='annotation_storage_dexterity')
             logger.info("Object %s state is %s", obj.absolute_url(), action)
             getattr(storage, action)(obj, **val)
 

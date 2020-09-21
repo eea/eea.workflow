@@ -3,7 +3,7 @@
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
-from zope.component import getMultiAdapter
+from zope.component import getMultiAdapter, queryAdapter
 from plone.protect import PostOnly
 from eea.workflow.archive import archive_object, archive_previous_versions, \
     archive_children, archive_translations, \
@@ -93,7 +93,9 @@ class ArchiveStatus(BrowserView):
     def info(self):
         """ Info used in view
         """
-        info = IObjectArchivator(self.context)
+        info = queryAdapter(self.context, IObjectArchivator) \
+            or queryAdapter(self.context, IObjectArchivator,
+                            name='annotation_storage_dexterity')
 
         rv = NamedVocabulary('eea.workflow.reasons')
         vocab = rv.getVocabularyDict(self.context)

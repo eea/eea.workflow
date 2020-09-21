@@ -127,4 +127,10 @@
         for="plone.dexterity.interfaces.IDexterityContent"
         name="annotation_storage_dexterity" />
 
+    <!-- Required in order to archive dexterity item versions -->
+    <class class="plone.dexterity.content.Item">
+      <implements interface="eea.versions.interfaces.IVersionEnhanced" />
+    </class>
+
+
 </configure>
