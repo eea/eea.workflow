@@ -1,6 +1,7 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
            xmlns:cmf="http://namespaces.zope.org/cmf"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
            xmlns:monkey="http://namespaces.plone.org/monkey"
            xmlns:plone="http://namespaces.plone.org/plone"
            i18n_domain="eea">
@@ -66,8 +67,20 @@
         handler="eea.workflow.events.handle_workflow_initial_state_created" />
 
     <subscriber
+        for="plone.dexterity.interfaces.IDexterityContent
+             eea.workflow.events.IInitialStateCreatedEvent"
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_workflow_initial_state_created" />
+
+    <subscriber
         for="Products.Archetypes.interfaces.IBaseContent
              eea.versions.interfaces.IVersionCreatedEvent"
+        handler="eea.workflow.events.handle_version_created" />
+
+    <subscriber
+        for="plone.dexterity.interfaces.IDexterityContent
+             eea.versions.interfaces.IVersionCreatedEvent"
+        zcml:condition="installed plone.dexterity.content"
         handler="eea.workflow.events.handle_version_created" />
 
     <subscriber
@@ -75,17 +88,49 @@
              zope.lifecycleevent.interfaces.IObjectCopiedEvent"
         handler="eea.workflow.events.handle_object_copied" />
 
-  <subscriber
-    for="Products.Archetypes.interfaces.IBaseContent
-             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler="eea.workflow.events.handle_object_expiration_removed" />
+    <subscriber
+      for="plone.dexterity.interfaces.IDexterityContent
+           zope.lifecycleevent.interfaces.IObjectCopiedEvent"
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_object_copied" />
 
+    <subscriber
+        for="Products.Archetypes.interfaces.IBaseContent
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler="eea.workflow.events.handle_object_expiration_removed" />
+
+    <subscriber
+        for="plone.dexterity.interfaces.IDexterityContent
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_object_expiration_removed" />
 
     <subscriber
         for="Products.Archetypes.interfaces.IBaseContent
              OFS.interfaces.IObjectClonedEvent"
         handler="eea.workflow.events.handle_object_cloned" />
 
-    <adapter factory=".archive.archive_annotation_storage" />
+    <subscriber
+        for="plone.dexterity.interfaces.IDexterityContent
+             OFS.interfaces.IObjectClonedEvent"
+        zcml:condition="installed plone.dexterity.content"
+        handler="eea.workflow.events.handle_object_cloned" />
+
+    <adapter
+        factory=".archive.archive_annotation_storage"
+        provides="eea.workflow.interfaces.IObjectArchivator"
+        for="Products.Archetypes.interfaces.IBaseContent" />
+
+    <adapter
+        factory=".archive.archive_annotation_storage"
+        provides="eea.workflow.interfaces.IObjectArchivator"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        name="annotation_storage_dexterity" />
+
+    <!-- Required in order to archive dexterity item versions -->
+    <class class="plone.dexterity.content.Item">
+      <implements interface="eea.versions.interfaces.IVersionEnhanced" />
+    </class>
+
 
 </configure>

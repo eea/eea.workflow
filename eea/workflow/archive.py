@@ -1,9 +1,8 @@
 """ IObjectArchived implementation
 """
-
 import logging
+from plone.dexterity.interfaces import IDexterityContent
 from persistent import Persistent
-
 from zope.interface import implements, alsoProvides, noLongerProvides
 from zope.annotation.factory import factory
 from zope.component import adapts, queryAdapter
@@ -24,7 +23,7 @@ class ObjectArchivedAnnotationStorage(Persistent):
     """ The IObjectArchived information stored as annotation
     """
     implements(IObjectArchivator)
-    adapts(IBaseObject)
+    adapts(IBaseObject, IDexterityContent)
 
     @property
     def is_archived(self):
@@ -158,7 +157,8 @@ def archive_object(context, **kwargs):
     :param kwargs: options that are passed to the archive method directly
            affecting it's results if they are passed
     """
-    storage = queryAdapter(context, IObjectArchivator)
+    storage = queryAdapter(context, IObjectArchivator) or queryAdapter(context,
+            IObjectArchivator, name='annotation_storage_dexterity')
     storage.archive(context, **kwargs)
     return context
 
@@ -166,7 +166,8 @@ def unarchive_object(context):
     """ Unarchive given context
     :param context: object
     """
-    storage = queryAdapter(context, IObjectArchivator)
+    storage = queryAdapter(context, IObjectArchivator) or queryAdapter(context,
+        IObjectArchivator, name='annotation_storage_dexterity')
     storage.unarchive(context)
     return context
 
@@ -185,7 +186,8 @@ def archive_children(context, **kwargs):
         obj = brain.getObject()
         if obj == context:
             continue
-        storage = queryAdapter(obj, IObjectArchivator)
+        storage = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+                IObjectArchivator, name='annotation_storage_dexterity')
         if not storage:
             continue
         storage.archive(obj, **kwargs)
@@ -206,7 +208,8 @@ def unarchive_children(context):
         if obj == context:
             continue
         if IObjectArchived.providedBy(obj):
-            storage = queryAdapter(obj, IObjectArchivator)
+            storage = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+                    IObjectArchivator, name='annotation_storage_dexterity')
             storage.unarchive(obj)
             affected_objects.append(obj)
     return affected_objects
@@ -274,7 +277,8 @@ def archive_obj_and_children(context, **kwargs):
     affected_objects = []
     for brain in brains:
         obj = brain.getObject()
-        storage = queryAdapter(obj, IObjectArchivator)
+        storage = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+            IObjectArchivator, name='annotation_storage_dexterity')
         if not storage:
             continue
         storage.archive(obj, **kwargs)
@@ -298,7 +302,9 @@ def archive_previous_versions(context, skip_already_archived=True,
     :rtype list
     """
     versions_adapter = IGetVersions(context)
-    archivator_adapter = queryAdapter(context, IObjectArchivator)
+    archivator_adapter = queryAdapter(context, IObjectArchivator) \
+                        or queryAdapter(context, IObjectArchivator,
+                        name='annotation_storage_dexterity')
     options = kwargs
     if not options:
         custom_message = getattr(archivator_adapter, 'custom_message', '')
@@ -325,7 +331,8 @@ def archive_previous_versions(context, skip_already_archived=True,
         if also_children:
             affected_objects.extend(archive_obj_and_children(obj, **options))
         else:
-            storage = queryAdapter(obj, IObjectArchivator)
+            storage = queryAdapter(obj, IObjectArchivator) or queryAdapter(obj,
+                IObjectArchivator, name='annotation_storage_dexterity')
             storage.archive(obj, **options)
             affected_objects.append(obj)
     return affected_objects

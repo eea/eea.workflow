@@ -1,7 +1,6 @@
 """ Eea.workflow interfaces
 """
 from zope.interface import Interface, Attribute
-#from zope.schema import List, Dict, TextLine, Object
 
 
 class IHasMandatoryWorkflowFields(Interface):

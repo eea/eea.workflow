@@ -5,6 +5,7 @@ from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from eea.workflow.interfaces import IObjectArchivator
 from eea.workflow.interfaces import IObjectArchived
 from plone.app.layout.viewlets.common import ViewletBase
+from zope.component import queryAdapter
 
 
 class ArchiveViewlet(ViewletBase):
@@ -14,7 +15,9 @@ class ArchiveViewlet(ViewletBase):
     def update(self):
         """ Update viewlet
         """
-        info = IObjectArchivator(self.context)
+        info = queryAdapter(self.context, IObjectArchivator) \
+            or queryAdapter(self.context, IObjectArchivator,
+                            name='annotation_storage_dexterity')
 
         rv = NamedVocabulary('eea.workflow.reasons')
         vocab = rv.getVocabularyDict(self.context)

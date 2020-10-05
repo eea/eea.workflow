@@ -1,6 +1,11 @@
 Changelog
 =========
 
+10.8 - (2020-09-17)
+---------------------------
+* Bug fix: Fixed archiving dexterity items when archiving children
+  [iulianpetchesi refs #118852]
+
 10.7 - (2020-01-14)
 ---------------------------
 * Change: unarchive object if expiration date is removed when editing object
